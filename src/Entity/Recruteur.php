@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecruteurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,37 +17,44 @@ class Recruteur
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $company_name = null;
+    private ?string $companyname = null;
 
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $phone_number = null;
+    private ?string $phone = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $siteWeb = null;
+    private ?string $siteweb = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recruteurs')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'recruteur', targetEntity: Annonces::class)]
+    private Collection $annonces;
+
+    public function __construct()
+    {
+        $this->annonces = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCompanyName(): ?string
+    public function getCompanyname(): ?string
     {
-        return $this->company_name;
+        return $this->companyname;
     }
 
-    public function setCompanyName(string $company_name): self
+    public function setCompanyname(string $companyname): self
     {
-        $this->company_name = $company_name;
+        $this->companyname = $companyname;
 
         return $this;
     }
@@ -62,26 +71,26 @@ class Recruteur
         return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getPhone(): ?string
     {
-        return $this->phone_number;
+        return $this->phone;
     }
 
-    public function setPhoneNumber(string $phone_number): self
+    public function setPhone(string $phone): self
     {
-        $this->phone_number = $phone_number;
+        $this->phone = $phone;
 
         return $this;
     }
 
-    public function getSiteWeb(): ?string
+    public function getSiteweb(): ?string
     {
-        return $this->siteWeb;
+        return $this->siteweb;
     }
 
-    public function setSiteWeb(string $siteWeb): self
+    public function setSiteweb(string $siteweb): self
     {
-        $this->siteWeb = $siteWeb;
+        $this->siteweb = $siteweb;
 
         return $this;
     }
@@ -106,6 +115,36 @@ class Recruteur
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonces>
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonces $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces->add($annonce);
+            $annonce->setRecruteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonces $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getRecruteur() === $this) {
+                $annonce->setRecruteur(null);
+            }
+        }
 
         return $this;
     }
