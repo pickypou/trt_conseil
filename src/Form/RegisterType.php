@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterType extends AbstractType
 {
@@ -45,8 +46,15 @@ class RegisterType extends AbstractType
                 'first_options' => [
                     'label' => 'Mot de passe',
                     'attr' => [
-                        'placeholder' => 'Merci de saisir votre mot de passe.'
-                    ]
+                        'placeholder' => 'Merci de saisir votre mot de passe.',
+                       
+                    ],
+                    'constraints' => [
+                        new Length([
+                            'min'=> 8,
+                            'minMessage' => 'Le mot de passe doit comporter au moins  caractères.',
+                        ]),
+                    ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmez votre mot de passe',
