@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-mon-compte{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5">Ma page perso</h1>
+
+<h5 class='text-center mt-4'>Bienvrnu {{app.user.firstname}} dans ton espace personnel ici tu peut modifier ou complété ton profile</h5>
+
+<p class="ms-5">
+- Mon prenom :{{app.user.firstname}}</br>
+-Mon nom : {{app.user.lastname}}</br>
+-Mon emai : {{app.user.email}}</br>
+-mon cv</br>
+-modifier mot de passe</br>
+-modifier mon cv</br>
+-voir les annonces ou déposer une annonce</br>
+{% if is_granted('ROLE_ADMIN') %}
+-Atribué un role
+{% endif %}
+
+</p>
+
+{% endblock %}
