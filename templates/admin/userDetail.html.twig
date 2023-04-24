@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-admin-detail-utilisateur{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-5"> Détail utilisateur</h1>
+
+<div class="col-4">
+				<div class="card border-primary mb-3" style="width: 18rem;">
+					<div class="card-body">
+						<h5 class="card-title">{{user.lastname}}</h5>
+						<h6 class="card-subtitle mb-2 text-muted">{{user.firstname}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">{{user.roles|join(',')}}</h6>
+						<p class="card-text">
+							<a href={{path('app_admin')}} class="card-link">retour a la liste</a>
+							<a href={{path('app_add_role', {id: user.id})}} class="card-link">Atribué un role</a>
+						</p>
+					</div>
+				</div>
+			</div>
+          
+
+{{form(addRole)}}
+{% endblock %}

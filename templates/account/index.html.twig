@@ -5,7 +5,7 @@
 {% block body %}
 <h1 class="text-center mt-5">Ma page perso</h1>
 
-<h5 class='text-center mt-4'>Bienvrnu {{app.user.firstname}} dans ton espace personnel ici tu peut modifier ou complété ton profile</h5>
+<h5 class='text-center mt-4'>Bienvenue {{app.user.firstname}} dans ton espace personnel ici tu peut modifier ou complété ton profile</h5>
 
 <p class="ms-5">
 - Mon prenom :{{app.user.firstname}}</br>
@@ -16,7 +16,9 @@
 -modifier mon cv</br>
 -voir les annonces ou déposer une annonce</br>
 {% if is_granted('ROLE_ADMIN') %}
+<a class = "role"href= {{path('app_admin')}}>
 -Atribué un role
+</a>
 {% endif %}
 
 </p>
