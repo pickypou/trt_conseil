@@ -9,13 +9,13 @@
 
 <p class="ms-5">
 - Mon prenom :{{app.user.firstname}}</br>
--Mon nom : {{app.user.lastname}}</br>
--Mon emai : {{app.user.email}}</br>
--mon cv</br>
--modifier mon cv
+- Mon nom : {{app.user.lastname}}</br>
+- Mon emai : {{app.user.email}}</br>
+- mon cv</br>
+- modifier mon cv
 </br>
 <a href ={{ path('app_change_password') }} class ="role">
--modifier mot de passe
+- modifier mot de passe
 </a></br>
 -voir les annonces ou déposer une annonce</br>
 {% if is_granted('ROLE_ADMIN') %}
