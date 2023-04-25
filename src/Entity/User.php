@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Candidat $candidat = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: InscriptionRequest::class)]
+    private Collection $inscriptionRequests;
+
+    #[ORM\Column]
+    private ?bool $type = null;
+
+    public function __construct()
+    {
+        $this->inscriptionRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -148,6 +161,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->candidat = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, InscriptionRequest>
+     */
+    public function getInscriptionRequests(): Collection
+    {
+        return $this->inscriptionRequests;
+    }
+
+    public function addInscriptionRequest(InscriptionRequest $inscriptionRequest): self
+    {
+        if (!$this->inscriptionRequests->contains($inscriptionRequest)) {
+            $this->inscriptionRequests->add($inscriptionRequest);
+            $inscriptionRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscriptionRequest(InscriptionRequest $inscriptionRequest): self
+    {
+        if ($this->inscriptionRequests->removeElement($inscriptionRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($inscriptionRequest->getUser() === $this) {
+                $inscriptionRequest->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isType(): ?bool
+    {
+        return $this->type;
+    }
+
+    public function setType(bool $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
