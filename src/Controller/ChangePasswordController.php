@@ -7,26 +7,33 @@ use App\Form\ChangePasswordType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+
 
 class ChangePasswordController extends AbstractController
 {
     private $entityManager;
-    public function __construct(EntityManagerInterface $entitiManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entitiManager;
+        $this->entityManager = $entityManager;
     }
     #[Route('/compte/change/password', name: 'app_change_password')]
+   
     public function index(
         Request $request,
-         UserPasswordHasherInterface $userPassword,
+        UserPasswordHasherInterface  $userPassword,
          ): Response
     {
         $notification = null;
 
         $user = $this->getUser();
+        if (!$user instanceof PasswordAuthenticatedUserInterface) {
+           throw new \LogicException("l'utilisateur doit être connecter avant de changer son mot de passe");
+        }
         $form = $this->createForm(ChangePasswordType::class, $user);
 
         $form->handleRequest($request);
