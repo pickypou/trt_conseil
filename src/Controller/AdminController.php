@@ -10,7 +10,7 @@ class AdminController extends AbstractController
 {
 
 
-
+    
     #[Route('/admin', name: 'app_admin')]
     public function admin(): Response
     {

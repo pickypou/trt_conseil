@@ -3,23 +3,23 @@
 {% block title %}trt-form-roles{% endblock %}
 
 {% block body %}
-<h1 class="text-center mt-5"> Atribution de role </h1>
+<h1 class="text-center mt-5 "> Atribution de role </h1>
 
-<div class="col-4">
+<div class="col-4 row">
 				<div class="card border-primary mb-3" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">{{user.lastname}}</h5>
 						<h6 class="card-subtitle mb-2 text-muted">{{user.firstname}}</h6>
                         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
 						<p class="card-text">
-							<a href={{path('app_admin')}} class="card-link">retour a la liste</a>
+							<a href={{path('app_admin')}} class="role">retour a la liste</a>
 							
 						</p>
 					</div>
 				</div>
 			</div>
           
-
+<div class='col-sm-2 col-form-label'>
 {{form(addRole)}}
-
+</div>
 {% endblock %}
