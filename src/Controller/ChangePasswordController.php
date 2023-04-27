@@ -51,9 +51,10 @@ class ChangePasswordController extends AbstractController
             } else {
                 $notification = "Votre mot de passe actuel n'est pas le bon";
             }
+            return $this->redirectToRoute('app_account');
         }
 
-        return $this->render('account/password.html.twig', [
+        return $this->render('account/changePassword.html.twig', [
             'form' => $form->createView(),
             'notification' => $notification
         ]);

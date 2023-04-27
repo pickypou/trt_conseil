@@ -14,8 +14,8 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
 						<h6 class="card-subtitle mb-2 text-muted">{{user.roles|join(',')}}</h6>
 						<p class="card-text">
-							<a href={{path('app_admin')}} class="card-link">retour a la liste</a>
-							<a href={{path('app_add_role', {id: user.id})}} class="card-link">Atribué un role</a>
+							<a href={{path('app_admin')}} class="role">retour a la liste</a>
+						
 						</p>
 					</div>
 				</div>
