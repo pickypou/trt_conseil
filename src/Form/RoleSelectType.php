@@ -18,7 +18,7 @@ class RoleSelectType extends AbstractType
                     'Candidat' =>'ROLE_CANDIDAT',
                     'Recruteur' => 'ROLE_RECRUTEUR',
                     'Consultant' => 'ROLE_CONSULTANT',
-                    'Admin' => 'ROLE_ADMIN',
+                    
                 ],
                 'label' => 'Sélectionnez un role',
                 'expanded' =>false,

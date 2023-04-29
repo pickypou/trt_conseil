@@ -19,10 +19,11 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
+           
             logout:
                 path: app_logout
                 # where to redirect after logout
-                # target: app_any_route
+               
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -33,8 +34,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/consultant, roles: ROLE_CONSULTANT }
+         - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_CONSULTANT] }
          - { path: ^/recruteur, roles: ROLE_RECRUTEUR }
          - { path: ^/candidat, roles: ROLE_CANDIDAT }
          - { path: ^/compte, roles: ROLE_USER }
