@@ -6,22 +6,25 @@
 {% block body %}
 	<h1 class="text-center mt-5">Liste des utilisateurs
 	</h1>
-
-	<div class="row mt-5">
+	<div class="d-flex justify-content-center">
+	<div class="row  mt-5">
+	<p class="text-center role-user">Le "Statut: USER" n'est pas un role valide</p>
 		{% for user in users %}
 			<div class="col-4">
 				<div class="card border-primary mb-3" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">{{user.lastname}}</h5>
 						<h6 class="card-subtitle mb-2 text-muted">{{user.firstname}}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">Satut: {{user.roles[0]|replace({'ROLE_': ''})}}</h6>
 						<p class="card-text">
-							<a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="card-link">voir les detail</a>
-							<a href="{{ path('app_add_role', {id: user.id}) }}" class="card-link">Atribué un role</a>
+							<a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="role">voir les detail</a>
+							
 						</p>
 					</div>
 				</div>
 			</div>
 		{% endfor %}
+	</div>
 	</div>
 
 

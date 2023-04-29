@@ -40,6 +40,7 @@ class RoleSelectController extends AbstractController
            $newRole = $addRole->get('roles')->getData();
            $user->setRoles([$newRole]);
            $this->entityManager->flush();
+           return $this->redirectToRoute('app_users_list');
         }
 
         return $this->render('admin/roleSelect.html.twig', [      
