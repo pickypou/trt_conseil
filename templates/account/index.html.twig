@@ -15,27 +15,17 @@
 
 - Mon nom : {{app.user.lastname}}</br>
 - Mon emai : {{app.user.email}}</br>
-- mon cv</br>
-- modifier mon cv
-</br>
-<a href ={{ path('app_change_password') }} class ="role">
-- modifier mot de passe
-</a></br>
--voir les annonces ou déposer une annonce</br>
-{% if is_granted('ROLE_ADMIN') %}
-<a class = "role"href= {{path('app_admin')}}>
--Atribué un role
-</a>
-{% endif %}
 
--Mon nom : {{app.user.lastname}}</br>
--Mon email : {{app.user.email}}</br>
-mon statut : {{app.user.roles[0]| replace({"ROLE_": ""}) }}
+
+- mon statut : {{app.user.roles[0]| replace({"ROLE_": ""}) }}
 </div>
 <div class="m-3">
 	
-	<a href={{path("app_cv")}} class="role">-mon cv</a></br>
--modifier mot de passe</br>
+	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
+	<a href ={{ path('app_change_password') }} class ="role">
+- modifier mot de passe
+</a></br>
+
 -modifier mon cv</br>
 -voir les annonces </br>
 -déposer une annonce</br>
