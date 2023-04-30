@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CandidatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidatRepository::class)]
 class Candidat
@@ -13,8 +14,8 @@ class Candidat
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(type: Types::BLOB)]
+   
+    #[ORM\Column(type: Types::STRING)]
     private $cv = null;
 
     #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
