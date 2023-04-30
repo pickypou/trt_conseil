@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,8 +27,9 @@ class UserDetailController extends AbstractController
         if (!$user) {
             $this->addFlash('error', "L'utilisateur n'existe pas!");
             return $this->redirectToRoute('app_users_list');
-
         }
+        $candidatRepository = $this->entityManager->getRepository(Candidat::class);
+        $candidat = $candidatRepository->findOneBy(['user'=>$user]);
          $role = $this->getUser()->getRoles();
         $addRole = $this->createForm(RoleSelectType::class, $role);
         $addRole->handleRequest($request);
@@ -42,6 +44,7 @@ class UserDetailController extends AbstractController
         return $this->render('admin/userDetail.html.twig',[
             'user'=>$user,
             'role' =>$role,
+            'candidat'=>$candidat,
             'addRole'=>$addRole->createView()
         ]);
     }
