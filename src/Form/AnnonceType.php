@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Annonces;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,7 +27,7 @@ class AnnonceType extends AbstractType
                     'placeholder'=>'1684 €'
                 ]
             ])
-            ->add('annonce',TextType::class,[
+            ->add('annonce',TextareaType::class,[
                 'label'=>'Rédiger votre annonce',
                 'attr'=>[
                     'placeholder'=>'Rédiger votre annonce'
