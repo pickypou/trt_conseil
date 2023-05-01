@@ -7,13 +7,26 @@
 
 <h5 class='text-center mt-4'>Bienvenue {{app.user.firstname}} sue cette page tu peut dépposer une annonce </h5>
 
-<p class="ms-5">
-- Mon prenom :{{app.user.firstname}}</br>
--Mon nom : {{app.user.lastname}}</br>
--Mon emai : {{app.user.email}}</br>
-</p>
+
+
 <div class="container">
-{{form(form)}}
+{{form_start (form)}}
+<div class="row">
+<div class="col">
+{{form_row(form.job)}}
+</div>
+<div class="col">
+{{form_row(form.salairy)}}
+</div>
+</div>
+<div class="row">
+<div class="col">
+{{form_row(form.annonce)}}
+</div>
+
+</div>
+{{form_rest(form)}}
+{{form_end(form)}}
 </div>
 
 
