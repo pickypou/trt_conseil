@@ -24,12 +24,18 @@
 	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
 	-voir les annonces </br>
 	{% endif %}
+
+	
 	<a href ={{ path('app_change_password') }} class ="role">
 - modifier mot de passe
 </a></br>
 
+{% if is_granted('ROLE_RECRUTEUR') %}
+<a href="{{path('app_recruteur')}}" class="role">
+-Mettre mon profile a jour
+</a> </br>
 <a href={{path("app_annonces")}} class="role">-Déposer une annonce</a></br>
-
+{% endif %}
 </div>
 </div>
 
