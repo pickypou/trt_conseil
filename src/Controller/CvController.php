@@ -44,10 +44,10 @@ class CvController extends AbstractController
             $safeFilename = $slugger->slug($originalFilename);
             $newFilename = $safeFilename.'-'.uniqid().'.'.$curriculumFile->guessExtension();
 
-            // Move the file to the directory where brochures are stored
+            // Move the file to the directory where cv are stored
             try {
                 $curriculumFile->move(
-                    $this->getParameter('brochures_directory'),
+                    $this->getParameter('cv_directory'),
                     $newFilename
                 );
             } catch (FileException $e) {

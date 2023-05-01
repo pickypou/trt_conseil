@@ -12,10 +12,20 @@
 <div class="d-flex justify-content-evenly ms-5 mt-5">
 <div class="m-3">
 - Mon prenom :{{app.user.firstname}}</br>
--Mon nom : {{app.user.lastname}}</br>
--Mon emai : {{app.user.email}}</br>
--mon cv</br>
--modifier mot de passe</br>
+
+- Mon nom : {{app.user.lastname}}</br>
+- Mon emai : {{app.user.email}}</br>
+
+
+- mon statut : {{app.user.roles[0]| replace({"ROLE_": ""}) }}
+</div>
+<div class="m-3">
+	
+	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
+	<a href ={{ path('app_change_password') }} class ="role">
+- modifier mot de passe
+</a></br>
+
 -modifier mon cv</br>
 -voir les annonces </br>
 -déposer une annonce</br>
