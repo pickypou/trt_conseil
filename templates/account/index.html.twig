@@ -20,14 +20,15 @@
 - mon statut : {{app.user.roles[0]| replace({"ROLE_": ""}) }}
 </div>
 <div class="m-3">
-	
+	{% if  is_granted('ROLE_CANDIDAT')%}
 	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
+	-voir les annonces </br>
+	{% endif %}
 	<a href ={{ path('app_change_password') }} class ="role">
 - modifier mot de passe
 </a></br>
 
--modifier mon cv</br>
--voir les annonces </br>
+
 -déposer une annonce</br>
 </div>
 </div>
