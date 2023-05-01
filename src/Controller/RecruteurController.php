@@ -38,6 +38,7 @@ class RecruteurController extends AbstractController
 
             $this->entityManager->persist($recruteur);
             $this->entityManager->flush();
+            return $this->redirectToRoute('app_account');
         }
         return $this->render('account/recruteur.html.twig', [
             'form' => $form->createView(),
