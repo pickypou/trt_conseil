@@ -11,8 +11,29 @@
 
 </p>
 <div class="container">
+{{form_start (form)}}
+<div class="row">
+<div class="col">
+{{form_row(form.companyname)}}
+</div>
+<div class="col">
+{{form_row(form.address)}}
+</div>
+</div>
+<div class="row">
+<div class="col">
+{{form_row(form.phone)}}
+</div>
+<div class="col">
+{{form_row(form.siteweb)}}
+</div>
+</div>
+{{form_rest(form)}}
+{{form_end(form)}}
+</div>
 
 </div>
+
 
 
 {% endblock %}
