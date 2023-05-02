@@ -26,6 +26,9 @@ class Annonces
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     private ?Recruteur $recruteur = null;
 
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Annonces
     public function setRecruteur(?Recruteur $recruteur): self
     {
         $this->recruteur = $recruteur;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
