@@ -44,6 +44,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $type = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $valited = null;
+
     public function __construct()
     {
         $this->inscriptionRequests = new ArrayCollection();
@@ -203,6 +206,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setType(bool $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function isValited(): ?bool
+    {
+        return $this->valited;
+    }
+
+    public function setValited(?bool $valited): self
+    {
+        $this->valited = $valited;
 
         return $this;
     }
