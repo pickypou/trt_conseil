@@ -5,7 +5,21 @@
  {% block body %}
  <h1 class="text-center mt-5">Inscription</h1>
 <div class='container'>
- {{form(form)}}
+<div class="container">
+{{form_start (form)}}
+<div class="row">
+<div class="col">
+{{form_row(form.firstname)}}
+</div>
+<div class="col">
+{{form_row(form.lastname)}}
+</div>
+</div>
+{{form_rest(form)}}
+{{form_end(form)}}
+</div>
+
+
  {% for error in form.password.vars.errors %}
     <div class="alert alert-danger">{{ error.message }}</div>
 {% endfor %}
