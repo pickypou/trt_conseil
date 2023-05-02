@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class AnnoncesController extends AbstractController
 {
@@ -28,10 +29,10 @@ class AnnoncesController extends AbstractController
         // Supprime le champ "recruteur" du formulaire pour que l'utilisateur ne puisse pas le modifier.
         $form->remove('recruteur');
     
-        $recruteur = $this->getUser();
-        if ($recruteur instanceof Recruteur) {
-            $annonce->setRecruteur($recruteur);
-        }
+       $user = $this->getUser();
+       $annonce->setUser($user);
+
+       
         
         // Gère la soumission du formulaire.
         $form->handleRequest($request);
@@ -43,6 +44,7 @@ class AnnoncesController extends AbstractController
     
             $this->entityManager->persist($annonce);
             $this->entityManager->flush();
+          
             
             return $this->redirectToRoute('app_account');
         }
