@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-depose-une-annonce{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5">Je dépose une annonce</h1>
+
+<h5 class='text-center mt-4'>Bienvenue {{app.user.firstname}} sue cette page tu peut dépposer une annonce </h5>
+
+
+
+<div class="container">
+{{form_start (form)}}
+<div class="row">
+<div class="col">
+{{form_row(form.job)}}
+</div>
+<div class="col">
+{{form_row(form.salairy)}}
+</div>
+</div>
+<div class="row">
+<div class="col">
+{{form_row(form.annonce)}}
+</div>
+
+</div>
+{{form_rest(form)}}
+{{form_end(form)}}
+</div>
+
+
+{% endblock %}

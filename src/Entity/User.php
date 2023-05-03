@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -25,6 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\Length(min=8, minMessage="")
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -38,18 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Candidat $candidat = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: InscriptionRequest::class)]
-    private Collection $inscriptionRequests;
-
-    #[ORM\Column]
-    private ?bool $type = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $valited = null;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Annonces::class)]
+    private Collection $annonces;
 
     public function __construct()
     {
-        $this->inscriptionRequests = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,57 +164,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, InscriptionRequest>
-     */
-    public function getInscriptionRequests(): Collection
+    public function __toString()
     {
-        return $this->inscriptionRequests;
+        return $this->roles;
     }
 
-    public function addInscriptionRequest(InscriptionRequest $inscriptionRequest): self
+    /**
+     * @return Collection<int, Annonces>
+     */
+    public function getAnnonces(): Collection
     {
-        if (!$this->inscriptionRequests->contains($inscriptionRequest)) {
-            $this->inscriptionRequests->add($inscriptionRequest);
-            $inscriptionRequest->setUser($this);
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonces $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces->add($annonce);
+            $annonce->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeInscriptionRequest(InscriptionRequest $inscriptionRequest): self
+    public function removeAnnonce(Annonces $annonce): self
     {
-        if ($this->inscriptionRequests->removeElement($inscriptionRequest)) {
+        if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
-            if ($inscriptionRequest->getUser() === $this) {
-                $inscriptionRequest->setUser(null);
+            if ($annonce->getUser() === $this) {
+                $annonce->setUser(null);
             }
         }
 
         return $this;
     }
 
-    public function isType(): ?bool
-    {
-        return $this->type;
-    }
-
-    public function setType(bool $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function isValited(): ?bool
-    {
-        return $this->valited;
-    }
-
-    public function setValited(?bool $valited): self
-    {
-        $this->valited = $valited;
-
-        return $this;
-    }
 }

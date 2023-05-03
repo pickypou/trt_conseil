@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-admin{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5 mb-5"> page d'aministration </h1>
+
+<a href= {{path('app_users_list')}} class="role ms-5 mt-5">-liste des utilisateurs</a>
+<a href= {{path('app_unvalidated_user')}} class="role ms-5 mt-5">-liste des utilisateurs non validés</a>
+
+{% endblock %}
