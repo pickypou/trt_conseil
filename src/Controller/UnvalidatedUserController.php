@@ -14,8 +14,10 @@ class UnvalidatedUserController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(User::class);
+
         $users = $repository->findBy(['validated'=>false]);
-        return $this->render('admin/unvalidated_user.html.twig', [
+
+        return $this->render('admin/unvalidatedUser.html.twig', [
             'user'=>$users,
         ]);
     }
