@@ -43,8 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Annonces::class)]
     private Collection $annonces;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $validated = null;
+    #[ORM\Column(nullable: false)]
+    private ?bool $validated = false;
 
     public function __construct()
     {

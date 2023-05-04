@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Liste des utilisateurs en attente de validation</h1>
+    <h1 class="text-center mt-5 mb-5">Liste des utilisateurs en attente de validation</h1>
 
     {% if users is empty %}
-        <p>Aucun utilisateur en attente de validation.</p>
+        <p class=" mt-5 mb-5">Aucun utilisateur en attente de validation.</p>
     {% else %}
         <ul>
             {% for user in users %}

@@ -18,7 +18,7 @@ class UnvalidatedUserController extends AbstractController
         $users = $repository->findBy(['validated'=>false]);
 
         return $this->render('admin/unvalidatedUser.html.twig', [
-            'user'=>$users,
+            'users'=>$users,
         ]);
     }
 }

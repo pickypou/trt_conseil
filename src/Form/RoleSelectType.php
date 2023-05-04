@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,6 +24,10 @@ class RoleSelectType extends AbstractType
                 'label' => 'Sélectionnez un role',
                 'expanded' =>false,
                 'multiple' => false,
+            ])
+            ->add('validated', CheckboxType::class,[
+                'required' => false,
+                'label' => 'Validated',
             ])
             ->add('envoyer', SubmitType::class)
         ;

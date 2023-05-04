@@ -37,6 +37,7 @@ class RoleSelectController extends AbstractController
         $addRole->handleRequest($request);
 
         if ($addRole->isSubmitted() && $addRole->isValid()) {
+            $user->setValidated($addRole->get('validated')->getData());
            $newRole = $addRole->get('roles')->getData();
            $user->setRoles([$newRole]);
            $this->entityManager->flush();

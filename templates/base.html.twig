@@ -35,11 +35,11 @@
 					</ul>
 				{% if app.user %}
 				 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_CONSULTANT') %}
-				  <a href="{{ path('app_admin') }}">Mon compte</a>| 
-				  {% else %} <a href="{{ path('app_account') }}">Mon compte</a>|
-				   {% endif %} <a href="{{ path('app_logout') }}">Déconnexion</a> 
-				   {% else %} <a href="{{ path('app_login') }}">Connexion</a>| 
-				   <a href="{{ path('app_register') }}">Inscription</a>
+				  <a href="{{ path('app_admin') }}" class="role">Mon compte</a>| 
+				  {% else %} <a href="{{ path('app_account') }}" class="role">Mon compte</a>|
+				   {% endif %} <a href="{{ path('app_logout') }}" class="role">Déconnexion</a> 
+				   {% else %} <a href="{{ path('app_login') }}" class="role">Connexion</a>| 
+				   <a href="{{ path('app_register') }}" class="role">Inscription</a>
 				    {% endif %}
 				</div>
 			</div>
