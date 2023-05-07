@@ -43,8 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Annonces::class)]
     private Collection $annonces;
 
-    #[ORM\Column(nullable: false)]
-    private ?bool $validated = false;
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved ;
 
     public function __construct()
     {
@@ -202,14 +202,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isValidated(): ?bool
+    public function isApproved(): ?bool
     {
-        return $this->validated;
+        return $this->isApproved;
     }
 
-    public function setValidated(?bool $validated): self
+    public function setIsApproved(?bool $isApproved): self
     {
-        $this->validated = $validated;
+        $this->isApproved = $isApproved;
 
         return $this;
     }

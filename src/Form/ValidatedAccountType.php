@@ -2,40 +2,44 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RoleSelectType extends AbstractType
+class ValidatedAccountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('roles', ChoiceType::class,[
+            ->add('email')
+            ->add('roles')
+            ->add('password')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('isApproved', ChoiceType::class, [
                 'choices' => [
-                    'Candidat' =>'ROLE_CANDIDAT',
-                    'Recruteur' => 'ROLE_RECRUTEUR',
-                    'Consultant' => 'ROLE_CONSULTANT',
-                    
+                    'Oui' => true,
+                    'Non' => false,
+                   
                 ],
-                'label' => 'Sélectionnez un role',
-                'expanded' =>false,
+                'label'=>'Validé le compte',
+                'expanded' => true,
                 'multiple' => false,
             ])
-         
-            ->add('envoyer', SubmitType::class)
+            ->add('candidat')
+            ->add('submit', SubmitType::class,[
+                'label'=>'validé'
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
-        
+            'data_class' => User::class,
         ]);
-        
-          
     }
 }
