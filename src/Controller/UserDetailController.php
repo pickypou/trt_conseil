@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
+use App\Service\MailerService;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class UserDetailController extends AbstractController
         $this->entityManager = $entityManager;
     }
     #[Route('admin/user/detail/{id<\d+>}', name: 'app_admin_user_detail')]
-    public function index(Request $request, ManagerRegistry $doctrine, $id): Response
+    public function index(Request $request, ManagerRegistry $doctrine, $id, MailerService $mailer): Response
     {
         $repository = $doctrine->getRepository(User::class);
         $user = $repository->find($id);
@@ -39,6 +40,8 @@ class UserDetailController extends AbstractController
            $newRole = $addRole->get('roles')->getData();
            $user->setRoles([$newRole]);
            $this->entityManager->flush();
+              // Envoyer un email de confirmation à l'utilisateur validé
+        $mailer->sendEmail($user);
            return $this->redirectToRoute('app_users_list');
         
         }
