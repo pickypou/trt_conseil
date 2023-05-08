@@ -5,11 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
-<<<<<<< HEAD
 use App\Service\MailerService;
-=======
-use App\Form\ValidatedAccountType;
->>>>>>> feature/admin
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
