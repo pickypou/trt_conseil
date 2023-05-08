@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
+use App\Form\ValidatedAccountType;
 use App\Service\MailerService;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
