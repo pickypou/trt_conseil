@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Liste des utilisateurs en attente de validation</h1>
+
+    {% if users is empty %}
+        <p class=" mt-5 mb-5">Aucun utilisateur en attente de validation.</p>
+    {% else %}
+    <div class="row mt-5 ">
+        {% for user in users %}
+            <div class="col-3">
+                <div class="card border-primary mb-3 ms-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom:
+                            {{user.lastname}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Prénom:
+                            {{user.firstname}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Email:
+                            {{user.email}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Satus: {{user.roles[0]|replace({'ROLE_': ''})}}</h6>
+                        
+                        <p class="card-text">
+                            <a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="role d-flex justify-content-center">voir les detail</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+        {% endfor %}
+    </div>
+    {% endif %}
+
+{% endblock %}

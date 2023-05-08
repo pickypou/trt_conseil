@@ -43,6 +43,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Annonces::class)]
     private Collection $annonces;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved ;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -195,6 +198,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $annonce->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(?bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
 
         return $this;
     }

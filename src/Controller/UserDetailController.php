@@ -5,7 +5,11 @@ namespace App\Controller;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
+<<<<<<< HEAD
 use App\Service\MailerService;
+=======
+use App\Form\ValidatedAccountType;
+>>>>>>> feature/admin
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,12 +49,35 @@ class UserDetailController extends AbstractController
            return $this->redirectToRoute('app_users_list');
         
         }
+        $isApproved = $this->createForm(ValidatedAccountType::class,$user);
+
+        $isApproved->remove('email');
+        $isApproved->remove('password');
+        $isApproved->remove('firstname');
+        $isApproved->remove('lastname');
+        $isApproved->remove('roles');
+        $isApproved->remove('candidat');
+
+        $isApproved->handleRequest($request);
+      
+
+        if ($isApproved->isSubmitted() && $isApproved->isValid()) {
+           $approved = $isApproved->get('isApproved')->getData();
+
+           $user->setIsApproved($approved);
+
+          
+           
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_unvalidated_user');
+        }
        
         return $this->render('admin/userDetail.html.twig',[
             'user'=>$user,
             'role' =>$role,
             'candidat'=>$candidat,
-            'addRole'=>$addRole->createView()
+            'addRole'=>$addRole->createView(),
+            'approved'=> $isApproved->createView()
         ]);
     }
 }

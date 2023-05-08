@@ -14,7 +14,13 @@
 				<h5 class="card-title">{{user.lastname}}</h5>
 				<h6 class="card-subtitle mb-2 text-muted">{{user.firstname}}</h6>
 				<h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
-				<h6 class="card-subtitle mb-2 text-muted">{{user.roles|join(',')}}</h6>
+				<h6 class="card-subtitle mb-2 text-muted">{{user.roles[0]|replace({'ROLE_': ''})}}</h6>
+				{% if user.isApproved is not null and not user.isApproved %}
+				<h6 class="card-subtitle mb-2 text-muted">{{form(approved)}}</h6>
+				{% endif %}
+					
+				
+
 				{% if user.candidat is not null and user.candidat.cv is not null %}
 					<a href="{{ asset('uploads/cv/' ~ user.candidat.cv) }}" download="{{ user.candidat.cv }}">
 						<h6 class="card-subtitle mb-2 text-muted">cv: télécharger le cv</h6>
@@ -30,6 +36,7 @@
 
 		<div class='col-sm-2 d-flex justify-content-center'>
 			{{form(addRole)}}
+			
 			</div>
 		</div>
 	{% endblock %}
