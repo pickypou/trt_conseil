@@ -15,28 +15,29 @@
 				<h6 class="card-subtitle mb-2 text-muted">{{user.firstname}}</h6>
 				<h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
 				<h6 class="card-subtitle mb-2 text-muted">{{user.roles[0]|replace({'ROLE_': ''})}}</h6>
-				{% if user.isApproved is not null and not user.isApproved %}
-				<h6 class="card-subtitle mb-2 text-muted">{{form(approved)}}</h6>
-				{% endif %}
-					
-				
+				{% if user.isApproved is null %}
+					<h6 class="card-subtitle mb-2 text-muted">
+						{{form(approved)}}
+						</h6>
+					{% endif %}
 
-				{% if user.candidat is not null and user.candidat.cv is not null %}
-					<a href="{{ asset('uploads/cv/' ~ user.candidat.cv) }}" download="{{ user.candidat.cv }}">
-						<h6 class="card-subtitle mb-2 text-muted">cv: télécharger le cv</h6>
-					</a>
-				{% endif %}
-				<p class="card-text text-center">
-					<a href={{path('app_admin')}} class="role">retour a la liste</a>
 
-				</p>
+					{% if user.candidat is not null and user.candidat.cv is not null %}
+						<a href="{{ asset('uploads/cv/' ~ user.candidat.cv) }}" download="{{ user.candidat.cv }}">
+							<h6 class="card-subtitle mb-2 text-muted">cv: télécharger le cv</h6>
+						</a>
+					{% endif %}
+					<p class="card-text text-center">
+						<a href={{path('app_admin')}} class="role">retour a la liste</a>
+
+					</p>
+				</div>
 			</div>
-		</div>
 
 
-		<div class='col-sm-2 d-flex justify-content-center'>
-			{{form(addRole)}}
-			
+			<div class='col-sm-2 d-flex justify-content-center'>
+				{{form(addRole)}}
+
+				</div>
 			</div>
-		</div>
-	{% endblock %}
+		{% endblock %}

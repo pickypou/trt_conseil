@@ -6,6 +6,11 @@
 parameters:
     cv_directory: '%kernel.project_dir%/public/uploads/cv'
 services:
+<<<<<<< HEAD
+=======
+    # default configuration for services in *this* file
+    App\Controller\UnvalidatedUserController:
+>>>>>>> feature/admin
    
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

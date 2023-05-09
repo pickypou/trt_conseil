@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +12,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class UnvalidatedUserController extends AbstractController
 {
     #[Route('/unvalidated/user', name: 'app_unvalidated_user')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, UserRepository $userRepository): Response
     {
-        $repository = $doctrine->getRepository(User::class);
-
-        $users = $repository->findBy(['isApproved'=>false]);
+        $unvalidatedUsers = $userRepository->findUnvalidatedUsers();
+       
 
         return $this->render('admin/unvalidatedUser.html.twig', [
-            'users'=>$users,
+            'users'=>$unvalidatedUsers,
         ]);
 
         

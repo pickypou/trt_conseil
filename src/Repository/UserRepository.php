@@ -55,6 +55,13 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $this->save($user, true);
     }
+    public function findUnvalidatedUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.isApproved IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return User[] Returns an array of User objects

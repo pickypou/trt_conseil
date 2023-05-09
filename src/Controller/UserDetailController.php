@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
@@ -66,6 +67,15 @@ class UserDetailController extends AbstractController
           
            
             $this->entityManager->flush();
+
+           $mail = new Mail();
+$mail->send(
+    $user->getEmail(),
+     $user->getFirstName(),
+     'Votre compte a été validé, bienvenue sur TRT-conseil',
+      'N\'oubliez pas de mettre vos informations personnelles à jour.'
+    );
+
             return $this->redirectToRoute('app_unvalidated_user');
         }
        
