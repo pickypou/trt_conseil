@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnoncesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,14 +31,13 @@ class Annonces
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     private ?User $user = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $locality = null;
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Candidacy::class)]
+    private Collection $candidacies;
 
-    #[ORM\Column(length: 255)]
-    private ?string $schedules = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?bool $isApproved = false;
+    public function __construct()
+    {
+        $this->candidacies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,42 +100,6 @@ class Annonces
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getLocality(): ?string
-    {
-        return $this->locality;
-    }
-
-    public function setLocality(string $locality): self
-    {
-        $this->locality = $locality;
-
-        return $this;
-    }
-
-    public function getSchedules(): ?string
-    {
-        return $this->schedules;
-    }
-
-    public function setSchedules(string $schedules): self
-    {
-        $this->schedules = $schedules;
-
-        return $this;
-    }
-
-    public function getIsApproved(): ?bool
-    {
-        return $this->isApproved;
-    }
-
-    public function setIsApproved(bool $isApproved): self
-    {
-        $this->isApproved = $isApproved;
 
         return $this;
     }
