@@ -37,6 +37,8 @@ class Recruteur
     #[ORM\OneToMany(mappedBy: 'recruteur', targetEntity: Annonces::class)]
     private Collection $annonces;
 
+   
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -148,4 +150,6 @@ class Recruteur
 
         return $this;
     }
+
+   
 }

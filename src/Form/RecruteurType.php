@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Recruteur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -38,7 +39,7 @@ class RecruteurType extends AbstractType
                     'placeholder'=>'https://www.monSiteWeb.com'
                 ]
             ])
-            ->add('description',TextType::class,[
+            ->add('description',TextareaType::class,[
                 'label'=>'Description de vos spécialitées'
             ])
             ->add('user')

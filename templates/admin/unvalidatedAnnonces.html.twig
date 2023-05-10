@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Liste des annonces en attente de validation</h1>
+
+    {% if annonces is empty %}
+        <p class=" mt-5 mb-5 text-center">Aucune annonce en attente de validation.</p>
+    {% else %}
+        <div class="row mt-5 ">
+            {% for annonceItem in annonces %}
+                <div class="col-3">
+                    <div class="card border-primary mb-3 ms-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Poste: {{ annonceItem.job }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Salaire: {{ annonceItem.salairy }}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Localité: {{ annonceItem.locality }}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Les horaires: {{ annonceItem.schedules }}</h6>
+                            
+                            <p class="card-text">
+                                <a href="{{ path('app_annonce_detail', { id: annonceItem.id }) }}" class="role d-flex justify-content-center">voir les détails</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

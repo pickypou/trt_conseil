@@ -43,7 +43,7 @@ class UserDetailController extends AbstractController
            $user->setRoles([$newRole]);
            $this->entityManager->flush();
               // Envoyer un email de confirmation à l'utilisateur validé
-        $mailer->sendEmail($user);
+       
            return $this->redirectToRoute('app_users_list');
         
         }

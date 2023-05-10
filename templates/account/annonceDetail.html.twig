@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-admin-detail-utilisateur
+{% endblock %}
+
+{% block body %}
+
+	<h1 class="text-center mt-5">
+		Détail de l'annonce</h1>
+
+<div class=" d-flex justify-content-center">
+	<div class="col-3">
+		<div class="card border-primary mb-3 ms-3" style="width: 30rem;">
+			<div class="card-body">
+				<h5 class="card-title">Poste:
+					{{annonce.job}}</h5>
+				<h6 class="card-title">Salaire:
+					{{annonce.salairy}}</h6>
+				<h6 class="card-title">Localité:
+					{{annonce.locality}}</h6>
+				<h6 class="card-title">Les horaires:
+					{{annonce.schedules}}</h6>
+				<h6 class="card-subtitle mb-2 text-muted">Les horaires:
+					{{annonce.annonce}}</h6>
+
+				{% if annonce.isApproved == false %}
+					<h6 class="card-subtitle mb-2 text-muted">
+						{{form(approved)}}
+						</h6>
+					{% endif %}
+					<p class="card-text">
+						<a href="{{ path('app_annonce_liste', {id: annonce.id}) }}" class="role d-flex justify-content-center">
+							retourné à la liste
+						</a>
+					</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+	{% endblock %}

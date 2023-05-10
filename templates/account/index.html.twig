@@ -22,7 +22,7 @@
 <div class="m-3">
 	{% if  is_granted('ROLE_CANDIDAT')%}
 	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
-	-voir les annonces </br>
+	<a href={{path("app_annonce_liste")}} class="role">-voir les annonces</a> </br>
 	{% endif %}
 
 	
