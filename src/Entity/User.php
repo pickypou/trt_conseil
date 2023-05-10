@@ -46,9 +46,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isApproved ;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidacy::class)]
+    private Collection $candidacies;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
+        $this->candidacies = new ArrayCollection();
     }
     
 
@@ -211,6 +215,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsApproved(?bool $isApproved): self
     {
         $this->isApproved = $isApproved;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidacy>
+     */
+    public function getCandidacies(): Collection
+    {
+        return $this->candidacies;
+    }
+
+    public function addCandidacy(Candidacy $candidacy): self
+    {
+        if (!$this->candidacies->contains($candidacy)) {
+            $this->candidacies->add($candidacy);
+            $candidacy->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidacy(Candidacy $candidacy): self
+    {
+        if ($this->candidacies->removeElement($candidacy)) {
+            // set the owning side to null (unless already changed)
+            if ($candidacy->getUser() === $this) {
+                $candidacy->setUser(null);
+            }
+        }
 
         return $this;
     }
