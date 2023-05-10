@@ -6,6 +6,10 @@
 parameters:
     cv_directory: '%kernel.project_dir%/public/uploads/cv'
 services:
+    # default configuration for services in *this* file
+    App\Controller\AnnonceDeatailController:
+        public: true
+       
    
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

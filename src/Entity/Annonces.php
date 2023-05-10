@@ -29,6 +29,15 @@ class Annonces
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $locality = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $schedules = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +99,42 @@ class Annonces
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLocality(): ?string
+    {
+        return $this->locality;
+    }
+
+    public function setLocality(string $locality): self
+    {
+        $this->locality = $locality;
+
+        return $this;
+    }
+
+    public function getSchedules(): ?string
+    {
+        return $this->schedules;
+    }
+
+    public function setSchedules(string $schedules): self
+    {
+        $this->schedules = $schedules;
+
+        return $this;
+    }
+
+    public function getIsApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
 
         return $this;
     }

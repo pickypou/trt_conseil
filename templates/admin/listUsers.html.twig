@@ -10,19 +10,13 @@
 	<div class="d-flex justify-content-center">
 	<div class="row  mt-5">
 	<p class="text-center role-user">Le "Statut: USER" n'est pas un role valide</p>
-
-
-	<div class="row mt-5 ">
-
+	{% for user in users %}
+	{% if user.isApproved %}
 	
-	</div>	{% for user in users %}
 			<div class="col-3">
 				<div class="card border-primary mb-3 ms-3" style="width: 18rem;">
 					<div class="card-body">
-
-							
-
-						<h5 class="card-title">Nom:
+<h5 class="card-title">Nom:
 							{{user.lastname}}</h5>
 						<h6 class="card-subtitle mb-2 text-muted">Prénom:
 							{{user.firstname}}</h6>
@@ -31,12 +25,11 @@
 							<h6 class="card-subtitle mb-2 text-muted">Satus: {{user.roles[0]|replace({'ROLE_': ''})}}</h6>
 						<p class="card-text">
 							<a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="role d-flex justify-content-center">voir les detail</a>
-						
-
-						</p>
+							</p>
 					</div>
 				</div>
 			</div>
+			{% endif %}
 		{% endfor %}
 	</div>
 

@@ -39,6 +39,14 @@ class AnnoncesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findUnvalidatedAnnonces()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.isApproved = false')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Annonces[] Returns an array of Annonces objects
 //     */

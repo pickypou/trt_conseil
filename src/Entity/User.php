@@ -50,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->annonces = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {
@@ -167,10 +168,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->roles;
-    }
+    public function __toString(): string
+{
+    return implode(', ', $this->roles) . ' - ' . $this->getEmail();
+}
 
     /**
      * @return Collection<int, Annonces>
