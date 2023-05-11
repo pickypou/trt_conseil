@@ -4,7 +4,9 @@
     <h1 class="text-center mt-5 mb-5">Liste des utilisateurs en attente de validation</h1>
 
     {% if users is empty %}
-        <p class=" mt-5 mb-5">Aucun utilisateur en attente de validation.</p>
+        <p class=" mt-5 mb-5">Aucun utilisateur en attente de validation.
+        <a href ="{{path('app_account')}}" class="role">Accueil</a>
+        </p>
     {% else %}
     <div class="row mt-5 ">
         {% for user in users %}

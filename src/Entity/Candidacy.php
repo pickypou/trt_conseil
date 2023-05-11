@@ -19,6 +19,9 @@ class Candidacy
     #[ORM\ManyToOne(inversedBy: 'candidacies')]
     private ?User $user = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Candidacy
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(?bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
 
         return $this;
     }

@@ -22,12 +22,13 @@
 					{{annonce.schedules}}</h6>
 				<h6 class="card-subtitle mb-2 text-muted">Les horaires:
 					{{annonce.annonce}}</h6>
+					
 
-				{% if annonce.isApproved == false %}
-					<h6 class="card-subtitle mb-2 text-muted">
-						{{form(approved)}}
-						</h6>
-					{% endif %}
+				{% if annonce.isApproved is null %}
+                    {{ form(approved) }}
+                {% else %}
+               {{ form(candidate) }}
+                {% endif %}
 					<p class="card-text">
 						<a href="{{ path('app_annonce_liste', {id: annonce.id}) }}" class="role d-flex justify-content-center">
 							retourné à la liste

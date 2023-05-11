@@ -34,6 +34,15 @@ class Annonces
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Candidacy::class)]
     private Collection $candidacies;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Locality = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $schedules = null;
+
     public function __construct()
     {
         $this->candidacies = new ArrayCollection();
@@ -100,6 +109,42 @@ class Annonces
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isIsApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(?bool $isApproved): self
+    {
+        $this->isApproved = $isApproved;
+
+        return $this;
+    }
+
+    public function getLocality(): ?string
+    {
+        return $this->Locality;
+    }
+
+    public function setLocality(string $Locality): self
+    {
+        $this->Locality = $Locality;
+
+        return $this;
+    }
+
+    public function getSchedules(): ?string
+    {
+        return $this->schedules;
+    }
+
+    public function setSchedules(string $schedules): self
+    {
+        $this->schedules = $schedules;
 
         return $this;
     }

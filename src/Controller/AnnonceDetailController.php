@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Classe\Mail;
 use App\Entity\Annonces;
+use App\Entity\Candidacy;
 use App\Entity\User;
+use App\Form\CandidacyType;
 use App\Form\ValidatedAnnonceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -67,10 +69,31 @@ class AnnonceDeatailController extends AbstractController
 
             return $this->redirectToRoute('app_annonce_liste');
         }
+        $candidacy = new Candidacy();
 
+        // Récupérer l'utilisateur actuellement connecté
+        $user = $this->getUser();
+
+        // Associer l'annonce et l'utilisateur à la candidature
+        $candidacy->setAnnonce($annonce);
+        $candidacy->setUser($user);
+
+        $candidate = $this->createForm(CandidacyType::class, $candidacy);
+        $candidate->remove('user');
+        $candidate->remove('annonce');
+
+        $candidate->handleRequest($request);
+
+        if ($candidate->isSubmitted() && $candidate->isValid()) {
+            // Sauvegarder la candidature en base de données
+            $this->entityManager->persist($candidacy);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_account');
+        }
         return $this->render('account/annonceDetail.html.twig', [
             'annonce' => $annonce,
-            'approved' => $isApproved->createView()
+            'approved' => $isApproved->createView(),
+            'candidate'=> $candidate->createView()
         ]);
     }
 }

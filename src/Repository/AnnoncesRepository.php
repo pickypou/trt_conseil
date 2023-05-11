@@ -42,7 +42,7 @@ class AnnoncesRepository extends ServiceEntityRepository
     public function findUnvalidatedAnnonces()
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.isApproved = false')
+            ->andWhere('a.isApproved IS NULL')
             ->getQuery()
             ->getResult();
     }
