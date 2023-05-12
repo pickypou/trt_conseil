@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidacy::class)]
     private Collection $candidacies;
 
+    #[ORM\OneToOne(mappedBy: 'user')]
+    private ?Recruteur $recruteur = null;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
@@ -245,6 +248,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $candidacy->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRecruteur(): ?Recruteur
+    {
+        return $this->recruteur;
+    }
+
+    public function setRecruteur(?Recruteur $recruteur): self
+    {
+        $this->recruteur = $recruteur;
 
         return $this;
     }
