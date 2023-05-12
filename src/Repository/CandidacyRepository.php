@@ -39,6 +39,14 @@ class CandidacyRepository extends ServiceEntityRepository
         }
     }
 
+    public function findUnvalidatedCandidacy()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.isApproved IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Candidacy[] Returns an array of Candidacy objects
 //     */

@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Classe\Mail;
 use App\Entity\Annonces;
 use App\Entity\Candidacy;
-use App\Entity\User;
 use App\Form\CandidacyType;
 use App\Form\ValidatedAnnonceType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,7 +68,7 @@ class AnnonceDeatailController extends AbstractController
 
             return $this->redirectToRoute('app_annonce_liste');
         }
-        $candidacy = new Candidacy();
+        $candidacy = new Candidacy;
 
         // Récupérer l'utilisateur actuellement connecté
         $user = $this->getUser();

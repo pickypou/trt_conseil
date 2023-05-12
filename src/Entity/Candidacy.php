@@ -51,7 +51,7 @@ class Candidacy
         return $this;
     }
 
-    public function isIsApproved(): ?bool
+    public function isApproved(): ?bool
     {
         return $this->isApproved;
     }
