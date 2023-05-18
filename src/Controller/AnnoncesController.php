@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\Annonces;
 use App\Entity\Recruteur;
 use App\Form\AnnonceType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +17,12 @@ use Symfony\Component\Security\Core\Security;
 class AnnoncesController extends AbstractController
 {
     private $entityManager;
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, Security $security)
     {
         $this->entityManager = $entityManager;
+        $this->security = $security;
     }
 
     #[Route('/annonces', name: 'app_annonces')]
@@ -41,13 +45,24 @@ class AnnoncesController extends AbstractController
             $annonce = $form->getData();
             $annonceName = $annonce->getAnnonce();
             $annonce->setAnnonce($annonceName);
-            $user = $this->getUser();
-          
+            $user = $this->security->getUser();
+            $recruteur = $user->getRecruteur();
+            $annonce->setRecruteur($recruteur);
+
             $annonce->setUser($user);
-           
+
 
             $this->entityManager->persist($annonce);
+            $mail = new Mail();
+            $mail->mailValidatedAnnonce(
+                $user->getEmail(),
+                $user->getFirstname(),
+              
+                'Votre annonce a été validé',
+                'nous revenons vers vous des un candidat a postulé a votre annonce'
+            );
             $this->entityManager->flush();
+
 
 
             return $this->redirectToRoute('app_account');

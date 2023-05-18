@@ -1,37 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}trt-admin/listUsers
-{% endblock %}
+{% block title %}trt-admin/listUsers{% endblock %}
 
 {% block body %}
-	<h1 class="text-center mt-5">Liste des utilisateurs
-	</h1>
+	<h1 class="text-center mt-5">Liste des utilisateurs</h1>
 
 	<div class="d-flex justify-content-center">
-	<div class="row  mt-5">
-	<p class="text-center role-user">Le "Statut: USER" n'est pas un role valide</p>
-	{% for user in users %}
-	{% if user.isApproved %}
-	
-			<div class="col-3">
-				<div class="card border-primary mb-3 ms-3" style="width: 18rem;">
-					<div class="card-body">
-<h5 class="card-title">Nom:
-							{{user.lastname}}</h5>
-						<h6 class="card-subtitle mb-2 text-muted">Prénom:
-							{{user.firstname}}</h6>
-						<h6 class="card-subtitle mb-2 text-muted">Email:
-							{{user.email}}</h6>
-							<h6 class="card-subtitle mb-2 text-muted">Satus: {{user.roles[0]|replace({'ROLE_': ''})}}</h6>
-						<p class="card-text">
-							<a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="role d-flex justify-content-center">voir les detail</a>
-							</p>
+		<div class="row mt-5">
+			<p class="text-center role-user">Le "Statut: USER" n'est pas un rôle valide</p>
+			{% for user in users %}
+				{% if user.isApproved %}
+					<div class="col-4">
+						<div class="card border-primary mb-3 ms-3 custom-card"style="width: 20rem;">
+							<div class="card-body">
+								<h5 class="card-title">Nom: {{ user.lastname }}</h5>
+								<h6 class="card-subtitle mb-2 text-muted">Prénom: {{ user.firstname }}</h6>
+								<h6 class="card-subtitle mb-2 text-muted">Email: {{ user.email }}</h6>
+								<h6 class="card-subtitle mb-2 text-muted">Statut: {{ user.roles[0]|replace({'ROLE_': ''}) }}</h6>
+								<p class="card-text">
+									<a href="{{ path('app_admin_user_detail', {id: user.id}) }}" class="role d-flex justify-content-center">Voir les détails</a>
+								</p>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			{% endif %}
-		{% endfor %}
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
-
-
 {% endblock %}

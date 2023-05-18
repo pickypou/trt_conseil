@@ -13,7 +13,7 @@
                     <div class="card border-primary mb-3 ms-3" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">Candidat: {{ candidacy.user.firstname }} {{ candidacy.user.lastname }}</h5>
-                            <h5 class="card-subtitle mb-2 text-muted">Candidat: {{ candidacy.user.candidat.cv }}</h5>
+                            
                             <h6 class="card-subtitle mb-2 text-muted">poste: {{ candidacy.annonce.job }}</h6>
                             <p class="card-text">
                                 <a href="{{ path('app_candidacy_detail', { id: candidacy.id }) }}" class="role d-flex justify-content-center">Voir les détails</a>

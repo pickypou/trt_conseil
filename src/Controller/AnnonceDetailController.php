@@ -57,7 +57,7 @@ class AnnonceDeatailController extends AbstractController
             $email = $user->getEmail();
 
             $email = new Mail();
-            $email->send(
+            $email->mailValidatedAnnonce(
                 $email,
                 $user->getFirstName(),
                 'Votre annonce à été validé',

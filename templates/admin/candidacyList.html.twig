@@ -12,9 +12,9 @@
 
 		{% for candidacy in candidacys %}
 			{% if candidacy.isApproved %}
-
+					
 				<div class="col-3">
-					<div class="card border-primary mb-3 ms-3" style="width: 18rem;">
+					<div class="card border-primary mb-3 ms-3" >
 						<div class="card-body">
 							<h5 class="card-title">Nom:
 								{{candidacy.user.Lastname}}</h5>
@@ -30,6 +30,7 @@
 					</div>
 				</div>
 			</div>
+			
 		{% endif %}
 	{% endfor %}
 </div>{% endblock %}

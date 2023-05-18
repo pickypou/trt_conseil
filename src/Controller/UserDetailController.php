@@ -7,7 +7,6 @@ use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RoleSelectType;
 use App\Form\ValidatedAccountType;
-use App\Service\MailerService;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +22,7 @@ class UserDetailController extends AbstractController
         $this->entityManager = $entityManager;
     }
     #[Route('admin/user/detail/{id<\d+>}', name: 'app_admin_user_detail')]
-    public function index(Request $request, ManagerRegistry $doctrine, $id, MailerService $mailer): Response
+    public function index(Request $request, ManagerRegistry $doctrine, $id, ): Response
     {
         $repository = $doctrine->getRepository(User::class);
         $user = $repository->find($id);
@@ -69,12 +68,13 @@ class UserDetailController extends AbstractController
             $this->entityManager->flush();
 
            $mail = new Mail();
-$mail->send(
+$mail->mailUserValidated(
     $user->getEmail(),
      $user->getFirstName(),
      'Votre compte a été validé, bienvenue sur TRT-conseil',
       'N\'oubliez pas de mettre vos informations personnelles à jour.'
     );
+
 
             return $this->redirectToRoute('app_unvalidated_user');
         }

@@ -31,7 +31,7 @@ class Recruteur
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'recruteur')]
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'recruteur', targetEntity: Annonces::class)]
