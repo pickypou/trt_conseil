@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exemple Mermaid</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <div class="mermaid">
+    ---
+    title: Diagrame de class
+    ---
+    classDiagram
+    direction RL
+    User --|> Candidat
+    User --|> Recruteur
+    User --|> Annonces
+    User --|> Candidacy
+    Annonces --|> Recruteur
+    Candidacy "1" -- "n" Candidat
+    Candidacy "1" -- "n" Annonces
+    
+    class User {
+      +int id
+      +String firstname
+      +String lastname
+      +String email
+      +String password
+    }
+    
+    class Candidat {
+      +int id
+      +int user id
+      +String cv
+    }
+    
+    class Recruteur {
+      +int id
+      +String companyname
+      +String address
+      +String phone
+      +String siteweb
+      +text description
+    }
+    
+    class Annonces {
+      +int id
+      +String job
+      +String salary
+      +String locality
+      +String schedules
+      +bool isApproved
+    }
+    
+    class Candidacy {
+      +int id
+      +int isApproved
+    }
+  </div>
+</body>
+</html>

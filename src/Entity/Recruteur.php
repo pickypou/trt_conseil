@@ -1,11 +1,9 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\RecruteurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RecruteurRepository::class)]
@@ -28,7 +26,7 @@ class Recruteur
     #[ORM\Column(length: 255)]
     private ?string $siteweb = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: 'text')]
     private ?string $description = null;
 
     #[ORM\OneToOne(inversedBy: 'recruteur')]
@@ -36,8 +34,6 @@ class Recruteur
 
     #[ORM\OneToMany(mappedBy: 'recruteur', targetEntity: Annonces::class)]
     private Collection $annonces;
-
-   
 
     public function __construct()
     {
@@ -150,6 +146,4 @@ class Recruteur
 
         return $this;
     }
-
-   
 }
