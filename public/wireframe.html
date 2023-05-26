@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exemple Mermaid - Wireframe</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+  <div class="mermaid">
+    ---
+    title: Wireframe
+    ---
+
+    graph LR
+    A[Utilisateurs]
+    B[Créer son compte]
+    C[Se connecter]
+    D[Créer un consultant]
+    E[Compléter son profil]
+    F[Publier une annonce]
+    G[Postuler à une annonce]
+    H[Consultant]
+    I[Administrateur]
+    
+    A --> B
+    A --> C
+    I --> D
+    A --> E
+    A --> F
+    A --> G
+    H --> F
+    H --> G
+    I --> F
+    I --> G
+    
+  </div>
+</body>
+</html>

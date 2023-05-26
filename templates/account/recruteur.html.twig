@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-change-mot-de-pasee{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5">Je finalise mon profile</h1>
+
+<h5 class='text-center mt-4'>Bienvenue {{app.user.firstname}} sur cette page tu peut mettre ton profile a jour </h5>
+
+<p class="ms-5">
+
+</p>
+<div class="container">
+{{form_start (form)}}
+<div class="row">
+<div class="col">
+{{form_row(form.companyname)}}
+</div>
+<div class="col">
+{{form_row(form.address)}}
+</div>
+</div>
+<div class="row">
+<div class="col">
+{{form_row(form.phone)}}
+</div>
+<div class="col">
+{{form_row(form.siteweb)}}
+</div>
+</div>
+{{form_rest(form)}}
+{{form_end(form)}}
+</div>
+
+</div>
+
+
+
+{% endblock %}

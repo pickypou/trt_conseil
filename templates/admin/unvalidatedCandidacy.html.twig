@@ -1,0 +1,27 @@
+ 
+ {% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Liste des candidatures en attente de validation</h1>
+
+    {% if candidacys is empty %}
+        <p class="mt-5 mb-5 text-center">Aucune candidature en attente de validation.</p>
+    {% else %}
+        <div class="row mt-5 ">
+            {% for candidacy in candidacys %}
+                <div class="col-3">
+                    <div class="card border-primary mb-3 ms-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Candidat: {{ candidacy.user.firstname }} {{ candidacy.user.lastname }}</h5>
+                            
+                            <h6 class="card-subtitle mb-2 text-muted">poste: {{ candidacy.annonce.job }}</h6>
+                            <p class="card-text">
+                                <a href="{{ path('app_candidacy_detail', { id: candidacy.id }) }}" class="role d-flex justify-content-center">Voir les détails</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

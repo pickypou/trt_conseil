@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-admin{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5 mb-5"> page d'aministration </h1>
+<div class="d-flex justify-content-center">
+
+<div class="card border-primary  me-5" style="width: 18rem;">
+<h5 class="card-title text-center mt-2">Les utilisateurs</h5>
+<a href= {{path('app_users_list')}} class="role ms-3 mt-3 mb-3">-liste des utilisateurs</a>
+<a href= {{path('app_unvalidated_user')}} class="role ms-3 mb-2">-liste des utilisateurs non validés</a>
+</div>
+<div class="card border-primary ms-5 me-5" style="width: 18rem;">
+<h5 class="card-title text-center mt-2">Les annonces</h5>
+<a href= {{path('app_annonce_liste')}} class="role ms-3 mt-3 mb-3">-liste des annonces</a>
+<a href= {{path('app_unvalidated_annonces_liste')}} class="role ms-3 mb-3">-liste des annonces non validés</a>
+</div>
+<div class="card border-primary  ms-5" style="width: 18rem;">
+<h5 class="card-title text-center mt-2">Les candidatures</h5>
+<a href = {{ path('app_candidacy_list')}} class ="role ms-3 mt-3 mb-3">-Liste des candidatures</a>
+<a href ="{{path('app_unvalidated_candidacy')}}" class="role ms-3 mb-3">Liste des candidatures non validé</a>
+</div
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-admin/listCandidatures
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center mt-5">Liste des candidatures
+	</h1>
+
+	<div class="d-flex justify-content-center">
+
+
+		{% for candidacy in candidacys %}
+			{% if candidacy.isApproved %}
+					
+				<div class="col-3">
+					<div class="card border-primary mb-3 ms-3" >
+						<div class="card-body">
+							<h5 class="card-title">Nom:
+								{{candidacy.user.Lastname}}</h5>
+								<h5 class="card-title">Nom:
+								{{candidacy.user.firstname}}</h5>
+							<h6 class="card-subtitle mb-2 text-muted">Ref annonce:
+								{{candidacy.annonce.id}}</h6>
+								<h5 class="card-title">Nom:
+								{{candidacy.annonce.job}}</h5>
+
+							<a href="{{ path('app_candidacy_detail', {id: candidacy.id}) }}" class="role d-flex justify-content-center">voir les detail</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			
+		{% endif %}
+	{% endfor %}
+</div>{% endblock %}

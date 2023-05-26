@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-mon-compte{% endblock %}
+
+{% block body %}
+<h1 class="text-center mt-5">Ma page perso</h1>
+
+
+<h5 class='text-center mt-4 mb-5'>Bienvenue {{app.user.firstname}} dans ton espace personnel ici tu peut modifier ou complété ton profile</h5>
+
+
+<div class="d-flex justify-content-evenly ms-5 mt-5">
+<div class="m-3">
+- Mon prenom :{{app.user.firstname}}</br>
+
+- Mon nom : {{app.user.lastname}}</br>
+- Mon emai : {{app.user.email}}</br>
+
+
+- mon statut : {{app.user.roles[0]| replace({"ROLE_": ""}) }}
+</div>
+<div class="m-3">
+	{% if  is_granted('ROLE_CANDIDAT')%}
+	<a href={{path("app_cv")}} class="role">-Déposer mon cv</a></br>
+	<a href={{path("app_annonce_liste")}} class="role">-voir les annonces</a> </br>
+	{% endif %}
+
+	
+	<a href ={{ path('app_change_password') }} class ="role">
+- modifier mot de passe
+</a></br>
+
+{% if is_granted('ROLE_RECRUTEUR') %}
+<a href="{{path('app_recruteur')}}" class="role">
+-Mettre mon profile a jour
+</a> </br>
+<a href={{path("app_annonces")}} class="role">-Déposer une annonce</a></br>
+
+{% endif %}
+</div>
+</div>
+
+
+{% endblock %}

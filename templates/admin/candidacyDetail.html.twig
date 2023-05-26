@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}trt-admin-detail-candidature
+{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center mt-5">
+	Détail Candidature</h1>
+
+<div class="d-flex justify-content-center mt-5">
+	<div class="card border-primary mb-3" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Nom: {{candidacy.user.lastname}}</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Prénom: {{candidacy.user.firstname}}</h6>
+			<h6 class="card-subtitle mb-2 text-muted">Email: {{candidacy.user.email}}</h6>
+			{% if candidacy.user.candidat is not null and candidacy.user.candidat.cv is not null %}
+				<a href="{{ asset('uploads/cv/' ~ candidacy.user.candidat.cv) }}" download="{{ candidacy.user.candidat.cv }}">
+					<h6 class="card-subtitle mb-2 text-muted">cv: télécharger le cv</h6>
+				</a>
+			{% endif %}
+
+
+			<p class="card-text text-center">
+				<a href={{path('app_unvalidated_candidacy')}} class="role">retour candidature non validées</a>
+
+			</p>
+		</div>
+	</div>
+	<div class="col-3">
+		<div class="card border-primary mb-3 ms-3" style="width: 30rem;">
+			<div class="card-body">
+			<h6 class="card-subtitle mb-2 text-muted">Ref annonce:
+								{{candidacy.annonce.id}}\{{candidacy.annonce.user.id}}</h6>
+				<h5 class="card-title">Poste:
+					{{candidacy.annonce.job}}</h5>
+				<h6 class="card-title">Salaire:
+					{{candidacy.annonce.salairy}}</h6>
+				<h6 class="card-title">Localité:
+					{{candidacy.annonce.locality}}</h6>
+				<h6 class="card-title">Les horaires:
+					{{candidacy.annonce.schedules}}</h6>
+				<h6 class="card-subtitle mb-2 text-muted">Les horaires:
+					{{candidacy.annonce.annonce}}</h6>
+
+
+			</div>
+		</div>
+	</div>
+	<p class="card-text">
+		<a href="{{ path('app_unvalidated_candidacy', {id: candidacy.id}) }}" class="role d-flex justify-content-center me-5">
+			retourné à la liste
+		</a>
+	</p>
+
+	{% if candidacy.isApproved is null %}
+
+		{{form(approved)}}
+		{% endif %}
+
+	</div>
+{% endblock %}

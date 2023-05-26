@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}trt-Liste-des-annonces{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-5 mb-5">Liste des annonces</h1>
+
+    <div class="row justify-content-center mt-5">
+        {% for annonce in annonces %}
+            {% if annonce.isApproved %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card border-primary mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">poste: {{annonce.job}}</h5>
+							<h6 class="card-subtitle mb-2 text-muted">Ref: {{annonce.id}} \{{annonce.user.id}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Localité: {{annonce.locality}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Salaire: {{annonce.salairy}}</h6>
+                            <p class="card-text">
+                                <a href="{{ path('app_annonce_detail', {id: annonce.id}) }}" class="role d-flex justify-content-center">Voir les détails</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
