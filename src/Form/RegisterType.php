@@ -52,7 +52,7 @@ class RegisterType extends AbstractType
                     'constraints' => [
                         new Length([
                             'min'=> 8,
-                            'minMessage' => 'Le mot de passe doit comporter au moins  caractères.',
+                            'minMessage' => 'Le mot de passe doit comporter au moins 8  caractères.',
                         ]),
                     ],
                 ],

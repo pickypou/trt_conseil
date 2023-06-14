@@ -10,6 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidatRepository::class)]
+#[Vich\Uploadable]
 class Candidat
 {
     #[ORM\Id]
@@ -23,10 +24,9 @@ class Candidat
     #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
-    /**
-     * @Vich\UploadableField(mapping="cv_file", fileNameProperty="cv")
-     */
-    private $cvFile;
+    
+    #[Vich\Uploadable]
+    private ?File $cvFile = null;
 
     public function getId(): ?int
     {
@@ -66,9 +66,6 @@ class Candidat
     {
         $this->cvFile = $cvFile;
 
-      
-
         return $this;
     }
-    
 }
